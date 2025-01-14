@@ -17,7 +17,7 @@
 <div class="contaoner">
     <div class="rows">
         <h1 class="text-center">Student record list</h1>
-        <div class="col-sm-8 offset-sm-2 mt-4">
+        <div class="col-sm-9 offset-sm-2 mt-4">
         <table id="ankit" border="1" align="center">
         <thead>
         <tr>
@@ -26,7 +26,9 @@
             <th>Student Branch</th>
             <th>Studebt Roll</th>
             <th>Studebt Address</th>
+            <th>Action</th>
         </tr>
+
 </thead>
 
 <tbody>
@@ -36,6 +38,11 @@ $q="select * from student";
 $z=mysqli_query($con,$q);
 while($rows=mysqli_fetch_array($z))
 {
+    $id=$rows["id"];
+    $nm=$rows["name"];
+    $rll=$rows["roll"];
+    $brn=$rows["branch"];
+    $adrs=$rows["address"];
     echo "<tr>";
     echo "<td>";
     echo $rows["id"];
@@ -52,12 +59,14 @@ while($rows=mysqli_fetch_array($z))
     echo "<td>";
     echo $rows["address"];
     echo "</td>";
-
-
+    echo "<td>";
+    echo "<a href='delete_record.php?id=$id'onclick='return confirm(\"are you sure you want to delete this record\")'; class='btn btn-danger'>Delete</a>";
+    echo "&nbsp;&nbsp;<a href='update_record.php?&id=$id&name=$nm&roll=$rll&branch=$brn&address=$adrs' onclick='return confirm(\"are you sure you want to update this record\")'; class='btn btn-warning'>Update</a>";
+    echo "</td>";
     echo "</tr>";
 }
 ?>
-
+ 
 </tbody>
 
 </table>
